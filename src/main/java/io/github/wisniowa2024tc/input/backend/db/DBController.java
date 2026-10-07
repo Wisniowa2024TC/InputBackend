@@ -1,4 +1,4 @@
-package io.github.wisniowa2024tc.input.backend;
+package io.github.wisniowa2024tc.input.backend.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
