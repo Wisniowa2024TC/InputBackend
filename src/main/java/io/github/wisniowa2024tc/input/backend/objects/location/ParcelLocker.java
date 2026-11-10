@@ -1,10 +1,9 @@
 package io.github.wisniowa2024tc.input.backend.objects.location;
 
+import io.github.wisniowa2024tc.input.backend.objects.AccessCode;
 import io.github.wisniowa2024tc.input.backend.objects.ParcelLocation;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Setter @Getter
