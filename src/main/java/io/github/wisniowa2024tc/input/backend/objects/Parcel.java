@@ -14,7 +14,8 @@ public class Parcel extends Identified {
     @Nullable private String name; // Nazwa paczki, opcjonalna
     @Nullable private String description; // Opis, opcjonalny
     @Nonnull @NonNull private Type type; // Co to za typ paczki
-    @Nonnull @NonNull
+    @ManyToOne @JoinColumn(name = "location_uuid")
+    @Nonnull @NonNull private ParcelLocation location; // Gdzie jest paczka
 
 
     public enum Type {

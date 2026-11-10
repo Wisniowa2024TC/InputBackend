@@ -14,5 +14,5 @@ import java.time.Instant;
 @RequiredArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccessCode extends Identified {
     @Nonnull private String code;
-    private Instant createdOn;
+    @Nonnull private Instant createdOn;
 }

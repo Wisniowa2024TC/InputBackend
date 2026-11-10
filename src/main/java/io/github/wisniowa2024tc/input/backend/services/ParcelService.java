@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.time.Instant;
 
 @Service
 public class ParcelService {
@@ -22,7 +23,7 @@ public class ParcelService {
 
 	public AccessCode requestAccessCode() {
 		String code = String.format("%06d", random.nextInt(1000000));
-		AccessCode accessCode = new AccessCode(code);
+		AccessCode accessCode = new AccessCode(code, Instant.now());
 		return accessCodeRepo.save(accessCode);
 	}
 }
