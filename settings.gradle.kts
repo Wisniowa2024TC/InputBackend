@@ -1,1 +1,1 @@
-rootProject.name = "InputSBackend"
+rootProject.name = "InputBackend"
