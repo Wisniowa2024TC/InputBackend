@@ -10,11 +10,13 @@ import io.github.wisniowa2024tc.input.backend.repositories.ParcelMachineRepo;
 import io.github.wisniowa2024tc.input.backend.repositories.ParcelRepo;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,5 +48,12 @@ public class ParcelService {
 			}
 		}
 		return locker;
+	}
+
+	public void testSetup() {
+		val machine = parcelMachineRepo.save(new ParcelMachine("Wiśniowa 69"));
+		ArrayList<ParcelLocker> parcelLockers = new ArrayList<>(10);
+		for (int i = 0; i < 10; i++)
+			parcelLockers.add(parcelLockerRepo.save(new ParcelLocker(machine, "locker" + i)));
 	}
 }

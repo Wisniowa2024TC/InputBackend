@@ -3,6 +3,7 @@ package io.github.wisniowa2024tc.input.backend.rest;
 import io.github.wisniowa2024tc.input.backend.objects.AccessCode;
 import io.github.wisniowa2024tc.input.backend.objects.Parcel;
 import io.github.wisniowa2024tc.input.backend.objects.location.ParcelLocker;
+import io.github.wisniowa2024tc.input.backend.objects.location.ParcelMachine;
 import io.github.wisniowa2024tc.input.backend.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,12 @@ import java.util.UUID;
 @RequestMapping("/api/v1/")
 public class ParcelController {
 	@Autowired private ParcelService parcelService;
+
+	@PostMapping(path = "testSetup")
+	public ResponseEntity<Integer> testSetup() {
+		parcelService.testSetup();
+		return ResponseEntity.ok(67);
+	}
 	
 	@PostMapping(path = "createParcel")
 	public ResponseEntity<Parcel> createParcel(@RequestBody Parcel parcel) {
