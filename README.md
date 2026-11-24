@@ -4,6 +4,7 @@
 ## Instalacja:
 1. Baza danych:
     ```mariadb
+    CREATE DATABASE IF NOT EXISTS inputbackend;
     CREATE USER 'inputbackend'@'localhost' IDENTIFIED BY 'YourStrongPasswordHere';
     GRANT ALL PRIVILEGES ON `inputbackend`.* TO 'inputbackend'@'localhost';
     FLUSH PRIVILEGES;
