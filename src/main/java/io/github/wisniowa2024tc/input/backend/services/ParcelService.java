@@ -2,12 +2,10 @@ package io.github.wisniowa2024tc.input.backend.services;
 
 import io.github.wisniowa2024tc.input.backend.objects.AccessCode;
 import io.github.wisniowa2024tc.input.backend.objects.Parcel;
+import io.github.wisniowa2024tc.input.backend.objects.ParcelLocation;
 import io.github.wisniowa2024tc.input.backend.objects.location.ParcelLocker;
 import io.github.wisniowa2024tc.input.backend.objects.location.ParcelMachine;
-import io.github.wisniowa2024tc.input.backend.repositories.AccessCodeRepo;
-import io.github.wisniowa2024tc.input.backend.repositories.ParcelLockerRepo;
-import io.github.wisniowa2024tc.input.backend.repositories.ParcelMachineRepo;
-import io.github.wisniowa2024tc.input.backend.repositories.ParcelRepo;
+import io.github.wisniowa2024tc.input.backend.repositories.*;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import lombok.val;
@@ -26,11 +24,17 @@ public class ParcelService {
 	@Autowired private AccessCodeRepo accessCodeRepo;
 	@Autowired private ParcelMachineRepo parcelMachineRepo;
 	@Autowired private ParcelLockerRepo parcelLockerRepo;
+	@Autowired private ParcelLocationRepo parcelLocationRepo;
 
 	private final SecureRandom random = new SecureRandom();
 	
-	public Parcel createParcel(Parcel parcel) {
-		return parcelRepo.save(parcel);
+	public Parcel createParcel(Optional<String> name, Optional<String> desc, Optional<Parcel.Type> type, UUID locationID) {
+		return parcelRepo.save(new Parcel(
+			name.orElse(null),
+			desc.orElse(null),
+			type.orElse(Parcel.Type.MACHINE_PICKUP),
+			parcelLocationRepo.getReferenceById(locationID)
+		));
 	}
 
 	public AccessCode requestAccessCode(UUID locker) {

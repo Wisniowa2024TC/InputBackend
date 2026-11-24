@@ -1,4 +1,4 @@
-package io.github.wisniowa2024tc.input.backend.rest.responces;
+package io.github.wisniowa2024tc.input.backend.rest.messages;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Setter @Getter
 @AllArgsConstructor
-public class CodeCheckResponse {
+public class CodeCheckMessage {
     @Nullable private String internalCode;
     @Nonnull private UUID machineID;
 }
