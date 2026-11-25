@@ -43,15 +43,18 @@ public class ParcelService {
 		return accessCodeRepo.save(accessCode);
 	}
 
-	public Optional<ParcelLocker> checkCode(String code, Optional<UUID> forMachine) {
+	// Outer is empty -> Machine not found
+	// Inner is empty -> Parcel not found / parcel not found in machine
+	public Optional<Optional<ParcelLocker>> checkCode(String code, Optional<UUID> forMachine) {
         Optional<ParcelLocker> locker = accessCodeRepo.getByCode(code).map(AccessCode::getLocker);
-		if (forMachine.isPresent() && locker.isPresent()) {
-			ParcelMachine machine = parcelMachineRepo.getReferenceById(forMachine.get());
-			if (locker.get().getMachine() != machine) {
-				return Optional.empty();
+		if (locker.isPresent() && forMachine.isPresent()) {
+			Optional<ParcelMachine> machine = parcelMachineRepo.getParcelMachineByUuid(forMachine.get());
+			if (machine.isEmpty()) return Optional.empty();
+			if (locker.get().getMachine() != machine.get()) {
+				return Optional.of(Optional.empty());
 			}
 		}
-		return locker;
+		return Optional.of(locker);
 	}
 
 	public void testSetup() {
@@ -59,5 +62,10 @@ public class ParcelService {
 		ArrayList<ParcelLocker> parcelLockers = new ArrayList<>(10);
 		for (int i = 0; i < 10; i++)
 			parcelLockers.add(parcelLockerRepo.save(new ParcelLocker(machine, "locker" + i)));
+	}
+
+	public Optional<Optional<Parcel>> getLockerContents(UUID lockerId) {
+		val locker = parcelLockerRepo.getReferenceById(lockerId);
+		return Optional.empty();
 	}
 }

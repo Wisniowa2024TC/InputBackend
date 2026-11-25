@@ -4,6 +4,7 @@ import io.github.wisniowa2024tc.input.backend.objects.AccessCode;
 import io.github.wisniowa2024tc.input.backend.objects.Parcel;
 import io.github.wisniowa2024tc.input.backend.objects.location.ParcelLocker;
 import io.github.wisniowa2024tc.input.backend.rest.messages.CodeCheckMessage;
+import io.github.wisniowa2024tc.input.backend.rest.messages.LockerContentMessage;
 import io.github.wisniowa2024tc.input.backend.rest.messages.ParcelCreationMessage;
 import io.github.wisniowa2024tc.input.backend.services.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,12 @@ public class ParcelController {
 		return ResponseEntity.of(locker.map(parcelLocker -> new CodeCheckMessage(
 			parcelLocker.getInternalCode(), parcelLocker.getMachine().getUuid()
 		)));
+	}
+
+	@GetMapping(path = "lockerContents")
+	public ResponseEntity<LockerContentMessage> getLockerContents(
+		@RequestParam UUID lockerId
+	) {
+		return ResponseEntity.notFound().build();
 	}
 }
